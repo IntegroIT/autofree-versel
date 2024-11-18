@@ -1,6 +1,6 @@
 const todayButton = document.getElementById("today");
 const tomorrowButton = document.getElementById("tomorrow");
-const customButton = document.getElementById("custom");
+// const customButton = document.getElementById("custom");
 const dateInputs = document.querySelector(".date-inputs");
 const date1Input = document.getElementById("date1");
 const date2Input = document.getElementById("date2");
@@ -18,11 +18,13 @@ const handleToday = () => {
 
   todayButton.classList.add("active");
   tomorrowButton.classList.remove("active");
-  customButton.classList.remove("active");
+  // customButton.classList.remove("active");
 
   if (dateInputs.style.display === "flex") {
     dateInputs.style.display = "none";
   }
+
+  handleSubmit();
 };
 
 const handleTomorrow = () => {
@@ -34,11 +36,13 @@ const handleTomorrow = () => {
 
   todayButton.classList.remove("active");
   tomorrowButton.classList.add("active");
-  customButton.classList.remove("active");
+  // customButton.classList.remove("active");
 
   if (dateInputs.style.display === "flex") {
     dateInputs.style.display = "none";
   }
+
+  handleSubmit();
 };
 
 const handleCustom = () => {
@@ -46,15 +50,17 @@ const handleCustom = () => {
 
   todayButton.classList.remove("active");
   tomorrowButton.classList.remove("active");
-  customButton.classList.add("active");
+  // customButton.classList.add("active");
 };
 
 const handleSubmit = () => {
+  const tg = window?.Telegram?.WebApp;
+  const chat_id = tg?.initDataUnsafe?.user?.id;
   const date1 = date1Input.value;
   const date2 = date2Input.value;
 
   // Создаем URL с параметрами
-  const apiUrl = `https://script.google.com/macros/s/AKfycbwzeFf8B_ru09VHhHjlQsbCvLm2p6MARSZO3Zl_FKfMTvvm1anWAP3ZJ_e_JDclBU2D/exec?date1=${date1}&date2=${date2}`;
+  const apiUrl = `https://script.google.com/macros/s/AKfycbwzeFf8B_ru09VHhHjlQsbCvLm2p6MARSZO3Zl_FKfMTvvm1anWAP3ZJ_e_JDclBU2D/exec?date1=${date1}&date2=${date2}&chat_id=${chat_id}`;
   console.log(apiUrl);
 
   // Покажите фон загрузки и индикатор
@@ -71,6 +77,7 @@ const handleSubmit = () => {
       if (!response.ok) {
         throw new Error("Ошибка при получении данных");
       }
+      tg.close();
       // Преобразование ответа в JSON
       return response.json();
     })
@@ -128,5 +135,5 @@ function hideLoader() {
 
 todayButton.addEventListener("click", handleToday);
 tomorrowButton.addEventListener("click", handleTomorrow);
-customButton.addEventListener("click", handleCustom);
+// customButton.addEventListener("click", handleCustom);
 submitButton.addEventListener("click", handleSubmit);
