@@ -69,7 +69,7 @@ button.active::before {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 90%;
+  /* width: 90%;. */
   height: 50px;
 }
 
@@ -79,10 +79,17 @@ input[type="date"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  width: 48%;
+  /* width: 48%; */
   height: 100%;
   margin-right: 5px;
   font-size: 25px;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field {
+  padding-left: 0;
+}
+input[type="date"]::-webkit-inner-spin-button {
+  opacity: 1;
 }
 
 #loader-container {
