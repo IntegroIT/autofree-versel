@@ -13,7 +13,7 @@ const getFormattedDate = (date) => {
 const handleToday = () => {
   const today = new Date();
   date1Input.value = getFormattedDate(today);
-  today.setDate(today.getDate() + 1);
+  // today.setDate(today.getDate() + 1);
   date2Input.value = getFormattedDate(today);
 
   todayButton.classList.add("active");
@@ -31,7 +31,7 @@ const handleTomorrow = () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   date1Input.value = getFormattedDate(tomorrow);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // tomorrow.setDate(tomorrow.getDate() + 1);
   date2Input.value = getFormattedDate(tomorrow);
 
   todayButton.classList.remove("active");
@@ -58,6 +58,7 @@ const handleSubmit = () => {
   const chat_id = tg?.initDataUnsafe?.user?.id;
   const date1 = date1Input.value;
   const date2 = date2Input.value;
+  console.log(date1, date2);
 
   // Создаем URL с параметрами
   const apiUrl = `https://script.google.com/macros/s/AKfycbwzeFf8B_ru09VHhHjlQsbCvLm2p6MARSZO3Zl_FKfMTvvm1anWAP3ZJ_e_JDclBU2D/exec?date1=${date1}&date2=${date2}&chat_id=${chat_id}`;
